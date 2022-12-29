@@ -8,8 +8,7 @@ export class BooksController {
   @Post('new')
   async createBooks(@Body() dto: Book) {
     try {
-      const { name, price } = dto;
-      return await this.booksService.createBooks(name, price);
+      return await this.booksService.createBooks(dto);
     } catch (error) {
       throw new Error(error.message);
     }

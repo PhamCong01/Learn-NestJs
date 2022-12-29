@@ -1,15 +1,18 @@
 import { Injectable } from '@nestjs/common';
+import { Book } from 'src/dto/book.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class BooksService {
   constructor(private prisma: PrismaService) {}
-  async createBooks(name, price) {
+  async createBooks(dto: Book) {
     try {
       const book = await this.prisma.books.create({
         data: {
-          name,
-          price,
+          name: dto.name,
+          price: dto.price,
+          email: dto.email,
+          userId: dto.userId,
         },
       });
       return book;
